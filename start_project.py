@@ -135,8 +135,14 @@ def setup_frontend():
         print_success("node_modules already exists")
         # On subsequent runs, do a quick clean to avoid stale build cache
         print("Cleaning frontend build cache...")
-        subprocess.run(["npm", "cache", "clean", "--force"], cwd=str(frontend_dir), check=False)
-        print_success("Cache cleaned")
+        try:
+            if sys.platform == "win32":
+                subprocess.run(f"cd /d {frontend_dir} && npm cache clean --force", shell=True, capture_output=True, check=False)
+            else:
+                subprocess.run(f"cd {frontend_dir} && npm cache clean --force", shell=True, capture_output=True, check=False)
+            print_success("Cache cleaned")
+        except Exception:
+            pass  # Silently fail if cache clean has issues
 
 
 def show_summary():
