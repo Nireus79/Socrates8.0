@@ -164,14 +164,14 @@ def start_automatic():
     # Get paths
     if sys.platform == "win32":
         python_exe = backend_dir / "venv" / "Scripts" / "python.exe"
-        activate_script = backend_dir / "venv" / "Scripts" / "activate.bat"
+        activate_script = backend_dir / "venv" / "Scripts" / "activate.ps1"
     else:
         python_exe = backend_dir / "venv" / "bin" / "python"
         activate_script = backend_dir / "venv" / "bin" / "activate"
 
     # Start backend
     if sys.platform == "win32":
-        backend_cmd = f'cd {backend_dir} && {activate_script} && uvicorn src.main:app --reload --host 0.0.0.0 --port 8000'
+        backend_cmd = f"cd '{backend_dir}'; & '{activate_script}'; uvicorn src.main:app --reload --host 0.0.0.0 --port 8000"
         subprocess.Popen(["powershell", "-NoExit", "-Command", backend_cmd])
     else:
         subprocess.Popen(
@@ -184,7 +184,7 @@ def start_automatic():
 
     # Start frontend
     if sys.platform == "win32":
-        frontend_cmd = f'cd {frontend_dir} && npm start'
+        frontend_cmd = f"cd '{frontend_dir}'; npm start"
         subprocess.Popen(["powershell", "-NoExit", "-Command", frontend_cmd])
     else:
         subprocess.Popen(
