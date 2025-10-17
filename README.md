@@ -126,6 +126,188 @@ bash test-docker.sh
 
 ---
 
+## Running Without Docker
+
+If you prefer to run the application directly on your machine without Docker, follow these steps:
+
+### Prerequisites (Native Setup)
+
+- **Python 3.11+** - [Download](https://www.python.org/downloads/)
+  - During installation, **CHECK** "Add Python to PATH"
+  - Verify: `python --version`
+
+- **PostgreSQL 15** - [Download](https://www.postgresql.org/download/)
+  - Remember the password you set during installation
+  - Verify: `psql --version`
+
+- **Node.js 18+** - [Download](https://nodejs.org/)
+  - Verify: `node --version` and `npm --version`
+
+- **Claude API Key** - [Get here](https://console.anthropic.com)
+
+### Step 1: Create PostgreSQL Database
+
+Open PowerShell or Command Prompt:
+
+```powershell
+# Connect to PostgreSQL (enter password when prompted)
+psql -U postgres
+
+# Run these SQL commands:
+CREATE DATABASE socrates_db;
+CREATE USER socrates WITH PASSWORD 'socrates123';
+ALTER ROLE socrates SET client_encoding TO 'utf8';
+ALTER ROLE socrates SET default_transaction_isolation TO 'read committed';
+ALTER ROLE socrates SET default_transaction_deferrable TO on;
+ALTER ROLE socrates SET default_transaction_read_only TO off;
+GRANT ALL PRIVILEGES ON DATABASE socrates_db TO socrates;
+\q
+```
+
+### Step 2: Setup Backend (Python/FastAPI)
+
+Open PyCharm Terminal:
+
+```powershell
+# Navigate to backend
+cd Socrates-8.0\backend
+
+# Create Python virtual environment
+python -m venv venv
+
+# Activate virtual environment
+.\venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Create .env file
+copy ..\Socrates-8.0\.env.example .env
+```
+
+Edit `.env` file and add:
+```
+DATABASE_URL=postgresql://socrates:socrates123@localhost:5432/socrates_db
+CLAUDE_API_KEY=sk-ant-xxxxxxxxxxxxx
+JWT_SECRET_KEY=your-secret-key-here
+```
+
+### Step 3: Run Backend
+
+In PyCharm Terminal (with venv activated):
+
+```powershell
+# Start FastAPI backend
+uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+You should see:
+```
+Uvicorn running on http://127.0.0.1:8000
+```
+
+**Keep this terminal open!**
+
+### Step 4: Setup Frontend (React)
+
+Open a **NEW terminal** in PyCharm:
+
+```powershell
+# Navigate to frontend
+cd Socrates-8.0\frontend
+
+# Install dependencies
+npm install
+
+# Create .env file
+copy .env.example .env
+```
+
+### Step 5: Run Frontend
+
+In the second PyCharm terminal:
+
+```powershell
+# Start React development server
+npm start
+```
+
+You should see:
+```
+Local:            http://localhost:3000
+```
+
+### Step 6: Access Application
+
+Open your browser:
+
+- **Frontend:** http://localhost:3000
+- **Backend API:** http://localhost:8000
+- **API Docs:** http://localhost:8000/docs
+
+### Native Development Commands
+
+```powershell
+# View backend logs
+# (visible in terminal where backend is running)
+
+# View frontend logs
+# (visible in terminal where frontend is running)
+
+# Stop backend
+# Ctrl+C in backend terminal
+
+# Stop frontend
+# Ctrl+C in frontend terminal
+
+# Access database
+psql -U socrates -d socrates_db
+
+# Install new backend dependency
+pip install package-name
+echo "package-name" >> requirements.txt
+
+# Install new frontend dependency
+npm install package-name
+```
+
+### Troubleshooting Native Setup
+
+| Problem | Solution |
+|---------|----------|
+| PostgreSQL not installed | Download from postgresql.org and install |
+| Python not found | Add Python to PATH or use full path |
+| npm not found | Install Node.js from nodejs.org |
+| Port 3000 in use | `netstat -ano \| findstr :3000` then kill process |
+| Port 8000 in use | Change to different port in backend |
+| Database connection failed | Check PostgreSQL is running, verify credentials |
+| Claude API error | Verify API key in .env file |
+
+### Quick Copy-Paste Terminal Commands
+
+**Terminal 1 - Backend:**
+```powershell
+cd Socrates-8.0\backend
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+copy ..\Socrates-8.0\.env.example .env
+# Edit .env with Claude API key and DB URL
+uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+**Terminal 2 - Frontend:**
+```powershell
+cd Socrates-8.0\frontend
+npm install
+copy .env.example .env
+npm start
+```
+
+Then open: **http://localhost:3000**
+
+---
+
 ## Project Structure
 
 ```
