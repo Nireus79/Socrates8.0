@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98668e2a-ba39-43a5-ad4f-8ad9b423f88b" name="Changes" comment="Fresh start">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Socrates-8.0" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Socrates-8.0/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/backend/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Socrates-8.0/backend/src/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/backend/src/dependencies.py" afterDir="false" />
