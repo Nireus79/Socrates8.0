@@ -40,14 +40,33 @@ The error wasn't caused by missing colors or configuration issues. It was caused
 ## Solution Implemented
 
 ### Updated `start_project.py`
-1. **Added cache cleaning on subsequent runs:**
+1. **Added UTF-8 encoding for Windows compatibility:**
+   ```python
+   # Fix Unicode encoding for Windows Command Prompt
+   if sys.platform == "win32":
+       os.environ["PYTHONIOENCODING"] = "utf-8"
+       sys.stdout.reconfigure(encoding="utf-8")
+   ```
+   - Fixes Unicode character display in Command Prompt
+   - Allows checkmark (✓) and X (✗) symbols to display correctly
+
+2. **Added cache cleaning on subsequent runs:**
    ```python
    # On subsequent runs, do a quick clean to avoid stale build cache
    print("Cleaning frontend build cache...")
-   subprocess.run(["npm", "cache", "clean", "--force"], cwd=str(frontend_dir), check=False)
+   try:
+       if sys.platform == "win32":
+           subprocess.run(f"cd /d {frontend_dir} && npm cache clean --force", shell=True, ...)
+       else:
+           subprocess.run(f"cd {frontend_dir} && npm cache clean --force", shell=True, ...)
+       print_success("Cache cleaned")
+   except Exception:
+       pass  # Silently fail if cache clean has issues
    ```
+   - Fixed: npm command not found issue by using shell=True
+   - Properly handles Windows and Unix paths
 
-2. **Added port conflict resolution:**
+3. **Added port conflict resolution:**
    ```python
    def kill_port_process(port):
        """Kill any process using a specific port (Windows only)"""
@@ -55,7 +74,7 @@ The error wasn't caused by missing colors or configuration issues. It was caused
        # Prevents "port already in use" errors on restart
    ```
 
-3. **Improved frontend setup messages:**
+4. **Improved frontend setup messages:**
    - Shows explicit "Running: npm install" message
    - Provides realistic time expectations (2-3 minutes)
 
@@ -123,6 +142,9 @@ curl http://localhost:8000/docs
 ## Commits Made
 
 ```
+7fce18c fix: Add UTF-8 encoding for Windows Command Prompt compatibility
+047b4d1 fix: Use shell=True for npm cache clean command to ensure npm is found
+cbecb8b docs: Add Session 2 summary with issue resolution
 b9562d3 docs: Add comprehensive troubleshooting guide
 e5a832a fix: Improve frontend setup with cache cleaning and port conflict handling
 ```
@@ -171,8 +193,11 @@ The user's earlier feedback about avoiding blind patching was heeded - a proper 
 ---
 
 **Date:** October 17, 2025
-**Duration:** ~30 minutes of focused debugging and fixing
-**Commits:** 2
+**Duration:** ~45 minutes of focused debugging, fixing, and refining
+**Commits:** 5 (including follow-up fixes for npm and encoding issues)
 **Files Created:** 1 (TROUBLESHOOTING.md)
-**Files Modified:** 1 (start_project.py)
-**Issues Resolved:** 1 (Frontend Tailwind CSS compilation)
+**Files Modified:** 2 (start_project.py, SESSION_2_SUMMARY.md)
+**Issues Resolved:** 3
+  1. Frontend Tailwind CSS compilation error
+  2. npm cache clean command not found
+  3. Unicode encoding error in Windows Command Prompt
