@@ -9,7 +9,9 @@
       <change beforePath="$PROJECT_DIR$/Socrates-8.0/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/backend/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Socrates-8.0/backend/src/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/backend/src/dependencies.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Socrates-8.0/backend/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/backend/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Socrates-8.0/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/frontend/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Socrates-8.0/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Socrates-8.0/frontend/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/frontend/src/services/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Socrates-8.0/frontend/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Socrates-8.0/frontend/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
