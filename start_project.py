@@ -12,6 +12,11 @@ import shutil
 import time
 from pathlib import Path
 
+# Fix Unicode encoding for Windows Command Prompt
+if sys.platform == "win32":
+    os.environ["PYTHONIOENCODING"] = "utf-8"
+    sys.stdout.reconfigure(encoding="utf-8")
+
 
 def print_header(title):
     """Print a formatted header"""
