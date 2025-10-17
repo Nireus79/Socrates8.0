@@ -127,11 +127,16 @@ def setup_frontend():
 
     # Check if node_modules exists
     if not (frontend_dir / "node_modules").exists():
-        print("Installing frontend dependencies (this may take a minute)...")
-        subprocess.run(["npm", "install", "--silent"], cwd=str(frontend_dir), check=True)
+        print("Installing frontend dependencies (this may take 2-3 minutes)...")
+        print("  - Running: npm install")
+        subprocess.run(["npm", "install"], cwd=str(frontend_dir), check=True)
         print_success("Frontend dependencies installed")
     else:
         print_success("node_modules already exists")
+        # On subsequent runs, do a quick clean to avoid stale build cache
+        print("Cleaning frontend build cache...")
+        subprocess.run(["npm", "cache", "clean", "--force"], cwd=str(frontend_dir), check=False)
+        print_success("Cache cleaned")
 
 
 def show_summary():
@@ -150,9 +155,40 @@ def show_summary():
     return choice
 
 
+def kill_port_process(port):
+    """Kill any process using a specific port (Windows only)"""
+    if sys.platform != "win32":
+        return
+
+    try:
+        # Find process on port
+        result = subprocess.run(
+            f'netstat -ano | findstr :{port}',
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+
+        if result.stdout:
+            # Extract PID (last column)
+            parts = result.stdout.strip().split()
+            pid = parts[-1]
+            # Kill the process
+            subprocess.run(f"taskkill -PID {pid} -F", shell=True, capture_output=True)
+            print(f"  Killed existing process on port {port} (PID: {pid})")
+    except Exception as e:
+        pass  # Silently fail if port is not in use
+
+
 def start_automatic():
     """Start backend and frontend automatically"""
     print_step(5, "Starting Backend and Frontend")
+
+    print("Checking for lingering processes on ports 8000 and 3000...")
+    kill_port_process(8000)
+    kill_port_process(3000)
+    print_success("Ports cleared")
+    print()
 
     print("Starting backend on port 8000...")
     print("Starting frontend on port 3000...")
@@ -161,18 +197,10 @@ def start_automatic():
     backend_dir = Path("Socrates-8.0/backend")
     frontend_dir = Path("Socrates-8.0/frontend")
 
-    # Get paths
+    # Start backend in cmd.exe
     if sys.platform == "win32":
-        python_exe = backend_dir / "venv" / "Scripts" / "python.exe"
-        activate_script = backend_dir / "venv" / "Scripts" / "activate.ps1"
-    else:
-        python_exe = backend_dir / "venv" / "bin" / "python"
-        activate_script = backend_dir / "venv" / "bin" / "activate"
-
-    # Start backend
-    if sys.platform == "win32":
-        backend_cmd = f"cd '{backend_dir}'; & '{activate_script}'; uvicorn src.main:app --reload --host 0.0.0.0 --port 8000"
-        subprocess.Popen(["powershell", "-NoExit", "-Command", backend_cmd])
+        backend_cmd = f"cd /d {backend_dir} && venv\\Scripts\\activate.bat && uvicorn src.main:app --reload --host 0.0.0.0 --port 8000"
+        subprocess.Popen(["cmd.exe", "/k", backend_cmd])
     else:
         subprocess.Popen(
             f"cd {backend_dir} && source venv/bin/activate && uvicorn src.main:app --reload --host 0.0.0.0 --port 8000",
@@ -182,10 +210,10 @@ def start_automatic():
     # Wait a bit for backend to start
     time.sleep(3)
 
-    # Start frontend
+    # Start frontend in cmd.exe
     if sys.platform == "win32":
-        frontend_cmd = f"cd '{frontend_dir}'; npm start"
-        subprocess.Popen(["powershell", "-NoExit", "-Command", frontend_cmd])
+        frontend_cmd = f"cd /d {frontend_dir} && npm start"
+        subprocess.Popen(["cmd.exe", "/k", frontend_cmd])
     else:
         subprocess.Popen(
             f"cd {frontend_dir} && npm start",
@@ -224,11 +252,11 @@ def start_manual():
     print("MANUAL START INSTRUCTIONS")
     print("=" * 80)
     print()
-    print("Open TWO separate PowerShell windows and run:\n")
+    print("Open TWO separate Command Prompt windows and run:\n")
     print("TERMINAL 1 - Backend (FastAPI):")
     print("-" * 80)
     print("cd Socrates-8.0\\backend")
-    print(".\\venv\\Scripts\\Activate.ps1")
+    print("venv\\Scripts\\activate.bat")
     print("uvicorn src.main:app --reload --host 0.0.0.0 --port 8000")
     print()
     print("TERMINAL 2 - Frontend (React):")
