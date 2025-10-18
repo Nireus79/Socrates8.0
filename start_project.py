@@ -15,6 +15,7 @@ from pathlib import Path
 # Fix Unicode encoding for Windows Command Prompt
 if sys.platform == "win32":
     os.environ["PYTHONIOENCODING"] = "utf-8"
+    # noinspection PyUnresolvedReference
     sys.stdout.reconfigure(encoding="utf-8")
 
 
@@ -74,7 +75,7 @@ def setup_backend():
     """Setup backend"""
     print_step(2, "Setting up Backend")
 
-    backend_dir = Path("Socrates-8.0/backend")
+    backend_dir = Path("backend")
     venv_dir = backend_dir / "venv"
 
     # Create venv if it doesn't exist
@@ -117,7 +118,7 @@ def setup_frontend():
     """Setup frontend"""
     print_step(3, "Setting up Frontend")
 
-    frontend_dir = Path("Socrates-8.0/frontend")
+    frontend_dir = Path("frontend")
 
     # Create .env if it doesn't exist
     env_file = frontend_dir / ".env"
@@ -205,8 +206,8 @@ def start_automatic():
     print("Starting frontend on port 3000...")
     print()
 
-    backend_dir = Path("Socrates-8.0/backend")
-    frontend_dir = Path("Socrates-8.0/frontend")
+    backend_dir = Path("backend")
+    frontend_dir = Path("frontend")
 
     # Start backend in cmd.exe
     if sys.platform == "win32":
@@ -266,13 +267,13 @@ def start_manual():
     print("Open TWO separate Command Prompt windows and run:\n")
     print("TERMINAL 1 - Backend (FastAPI):")
     print("-" * 80)
-    print("cd Socrates-8.0\\backend")
+    print("cd backend")
     print("venv\\Scripts\\activate.bat")
     print("uvicorn src.main:app --reload --host 0.0.0.0 --port 8000")
     print()
     print("TERMINAL 2 - Frontend (React):")
     print("-" * 80)
-    print("cd Socrates-8.0\\frontend")
+    print("cd frontend")
     print("npm start")
     print()
     print("Then open in browser:")
@@ -286,8 +287,8 @@ def main():
     print_header("SOCRATES 8.0 - Project Startup Script")
 
     # Check if we're in the right directory
-    if not Path("Socrates-8.0").exists():
-        print_error("This script must be run from the Socrates-8.0 project root")
+    if not Path("backend").exists() or not Path("frontend").exists():
+        print_error("This script must be run from the project root (backend/ and frontend/ directories not found)")
 
     try:
         # Check prerequisites
