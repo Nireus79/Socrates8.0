@@ -211,11 +211,13 @@ def start_automatic():
 
     # Start backend in cmd.exe
     if sys.platform == "win32":
-        backend_cmd = f"cd /d {backend_dir} && venv\\Scripts\\activate.bat && uvicorn src.main:app --reload --host 0.0.0.0 --port 8000"
+        python_exe = str((backend_dir / "venv" / "Scripts" / "python.exe").resolve())
+        backend_cmd = f'cd /d {backend_dir} && {python_exe} -m uvicorn src.main:app --reload --host 0.0.0.0 --port 8000'
         subprocess.Popen(["cmd.exe", "/k", backend_cmd])
     else:
+        python_exe = str((backend_dir / "venv" / "bin" / "python").resolve())
         subprocess.Popen(
-            f"cd {backend_dir} && source venv/bin/activate && uvicorn src.main:app --reload --host 0.0.0.0 --port 8000",
+            f'cd {backend_dir} && {python_exe} -m uvicorn src.main:app --reload --host 0.0.0.0 --port 8000',
             shell=True
         )
 
