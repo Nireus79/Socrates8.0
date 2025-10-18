@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { api } from '../services/api'
 import { Project, Session } from '../types/models'
+import { CreateSessionModal } from '../components/CreateSessionModal'
 import './Pages.css'
 
 export const ProjectDetail: React.FC = () => {
@@ -11,6 +12,7 @@ export const ProjectDetail: React.FC = () => {
   const [sessions, setSessions] = useState<Session[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [showCreateSession, setShowCreateSession] = useState(false)
 
   useEffect(() => {
     const fetchProjectData = async () => {
@@ -46,8 +48,18 @@ export const ProjectDetail: React.FC = () => {
   }
 
   const handleNewSession = () => {
-    // TODO: Show modal or navigate to create session page
-    console.log('Create new session for project:', projectId)
+    setShowCreateSession(true)
+  }
+
+  const handleSessionCreated = async () => {
+    // Refresh sessions list
+    if (projectId) {
+      const sessionsRes = await api.getSessions()
+      const projectSessions = sessionsRes.data?.filter(
+        (s: Session) => s.project_id === projectId
+      ) || []
+      setSessions(projectSessions)
+    }
   }
 
   if (loading) {
@@ -126,6 +138,15 @@ export const ProjectDetail: React.FC = () => {
           )}
         </section>
       </div>
+
+      {projectId && (
+        <CreateSessionModal
+          isOpen={showCreateSession}
+          projectId={projectId}
+          onClose={() => setShowCreateSession(false)}
+          onSuccess={handleSessionCreated}
+        />
+      )}
     </div>
   )
 }

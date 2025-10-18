@@ -16,16 +16,21 @@ export interface AuthResponse {
 // Project types
 export interface Project {
   id: string
-  name: string
+  title?: string
+  name?: string
   description: string
   owner_id: string
+  status?: 'PLANNING' | 'ACTIVE' | 'COMPLETED'
+  technology_stack?: string[]
   created_at: string
   updated_at: string
 }
 
 export interface CreateProjectRequest {
-  name: string
+  title?: string
+  name?: string
   description: string
+  technology_stack?: string[]
 }
 
 // Session types
@@ -34,16 +39,19 @@ export interface Session {
   project_id: string
   user_id: string
   title: string
-  description: string
-  status: 'active' | 'completed' | 'archived'
+  status: 'ACTIVE' | 'COMPLETED' | 'ARCHIVED' | 'active' | 'completed' | 'archived'
+  mode?: 'chat' | 'question' | 'teaching' | 'review'
+  role_description?: string
   created_at: string
   updated_at: string
+  archived_at?: string
 }
 
 export interface CreateSessionRequest {
   project_id: string
   title: string
-  description: string
+  mode?: 'chat' | 'question' | 'teaching' | 'review'
+  role_description?: string
 }
 
 // Message types
@@ -52,8 +60,12 @@ export interface Message {
   session_id: string
   user_id: string
   content: string
-  type: 'user' | 'ai' | 'system'
+  type?: 'user' | 'ai' | 'system' | 'assistant'
+  role?: 'user' | 'assistant' | 'system'
+  message_type?: string
+  meta?: Record<string, any>
   created_at: string
+  updated_at?: string
 }
 
 export interface CreateMessageRequest {
