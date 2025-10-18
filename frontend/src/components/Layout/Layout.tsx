@@ -65,6 +65,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault()
+                  navigate('/messages')
                 }}
                 className="nav-link"
               >
@@ -77,6 +78,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault()
+                  navigate('/settings')
                 }}
                 className="nav-link"
               >

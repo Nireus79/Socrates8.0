@@ -9,7 +9,8 @@
       "Bash(curl:*)",
       "Bash(npm install vite @vitejs/plugin-react --save-dev)",
       "Bash(npm run build)",
-      "Bash(npm install react-router-dom)"
+      "Bash(npm install react-router-dom)",
+      "Bash(tree \"C:\\Users\\themi\\PycharmProjects\\Socrates8.0\\backend\\src\" -I \"__pycache__|*.pyc\" -L 3)"
     ],
     "deny": [],
     "ask": []

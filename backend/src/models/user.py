@@ -4,7 +4,7 @@ import uuid
 from sqlalchemy import Column, String, DateTime, Text, func
 from sqlalchemy.orm import relationship
 
-from src.models.base import Base
+from backend.src.models.base import Base
 
 
 class User(Base):

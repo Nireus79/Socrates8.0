@@ -33,7 +33,17 @@ export const Register: React.FC = () => {
       await register(email, password, name)
       navigate('/dashboard')
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Registration failed. Please try again.')
+      let errorMessage = 'Registration failed. Please try again.'
+
+      if (err.response?.data?.detail) {
+        const detail = err.response.data.detail
+        // Handle both string and object error responses
+        errorMessage = typeof detail === 'string' ? detail : JSON.stringify(detail)
+      } else if (err.message) {
+        errorMessage = err.message
+      }
+
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }

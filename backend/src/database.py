@@ -3,7 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import NullPool
-from src.config import settings
+from backend.src.config import settings
 
 # Create database engine
 if settings.DATABASE_URL.startswith("sqlite"):

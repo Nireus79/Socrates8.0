@@ -12,8 +12,8 @@ from alembic import context
 import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from src.models import Base
-from src.config import settings
+from backend.src.models import Base
+from backend.src.config import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

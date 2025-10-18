@@ -4,7 +4,7 @@ import uuid
 import pytest
 from passlib.context import CryptContext
 
-from src.repositories import (
+from backend.src.repositories import (
     UserRepository,
     ProjectRepository,
     SessionRepository,

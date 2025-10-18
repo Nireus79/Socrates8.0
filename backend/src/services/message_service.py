@@ -5,9 +5,9 @@ from uuid import UUID
 from sqlalchemy.orm import Session
 from anthropic import Anthropic
 
-from src.models import Message
-from src.repositories import MessageRepository, SessionRepository
-from src.services.base_service import BaseService
+from backend.src.models import Message
+from backend.src.repositories import MessageRepository, SessionRepository
+from backend.src.services.base_service import BaseService
 
 
 class MessageService(BaseService):

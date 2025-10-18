@@ -4,19 +4,19 @@ import pytest
 from uuid import uuid4
 from datetime import datetime, timedelta
 
-from src.services.user_service import UserService
-from src.services.project_service import ProjectService
-from src.services.session_service import SessionService
-from src.services.message_service import MessageService
-from src.services.preference_service import PreferenceService
-from src.repositories import (
+from backend.src.services.user_service import UserService
+from backend.src.services.project_service import ProjectService
+from backend.src.services.session_service import SessionService
+from backend.src.services.message_service import MessageService
+from backend.src.services.preference_service import PreferenceService
+from backend.src.repositories import (
     UserRepository,
     ProjectRepository,
     SessionRepository,
     MessageRepository,
     PreferenceRepository,
 )
-from src.models import User, Project, Session, Message, UserPreference
+from backend.src.models import User, Project, Session, Message, UserPreference
 
 
 class TestUserService:

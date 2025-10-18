@@ -40,10 +40,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     try {
       const response = await api.login(email, password)
-      const { access_token, user } = response.data
+      // Handle nested response structure: { success, data: { access_token, user_id, username, email, ... } }
+      const loginData = response.data.data || response.data
+      const { access_token } = loginData
 
       localStorage.setItem('access_token', access_token)
-      setUser(user)
+
+      // Create user object from login response
+      const userData: User = {
+        id: loginData.user_id || loginData.id || '',
+        email: loginData.email,
+        name: loginData.username || `${loginData.first_name || ''} ${loginData.last_name || ''}`.trim(),
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+      setUser(userData)
     } catch (error) {
       console.error('Login failed:', error)
       throw error
@@ -53,10 +64,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (email: string, password: string, name: string) => {
     try {
       const response = await api.register(email, password, name)
-      const { access_token, user } = response.data
+      // Backend returns: { success, data: { id, username, email, first_name, last_name, created_at }, message }
+      // Note: Registration doesn't return access_token, user needs to login after
+      const userData = response.data.data || response.data
 
-      localStorage.setItem('access_token', access_token)
-      setUser(user)
+      // Auto-login after registration by calling login
+      await login(email, password)
     } catch (error) {
       console.error('Registration failed:', error)
       throw error

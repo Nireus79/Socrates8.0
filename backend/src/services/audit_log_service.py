@@ -4,9 +4,9 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from src.models import AuditLog
-from src.repositories import AuditLogRepository
-from src.services.base_service import BaseService
+from backend.src.models import AuditLog
+from backend.src.repositories import AuditLogRepository
+from backend.src.services.base_service import BaseService
 
 
 class AuditLogService(BaseService):

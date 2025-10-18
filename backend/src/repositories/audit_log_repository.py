@@ -4,8 +4,8 @@ from typing import List, Optional
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from src.models import AuditLog
-from src.repositories.base_repository import BaseRepository
+from backend.src.models import AuditLog
+from backend.src.repositories.base_repository import BaseRepository
 
 
 class AuditLogRepository(BaseRepository[AuditLog]):

@@ -5,10 +5,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98668e2a-ba39-43a5-ad4f-8ad9b423f88b" name="Changes" comment="front">
+      <change beforePath="$PROJECT_DIR$/.claude/settings.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/settings.local.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/alembic/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/alembic/env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/scripts/seed_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/scripts/seed_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/api/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/api/routes/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/api/routes/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/api/routes/message.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/api/routes/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/api/routes/profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/api/routes/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/api/routes/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/api/routes/session.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/api/routes/session.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/auth/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/auth/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/auth/jwt_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/auth/jwt_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/dependencies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models/audit_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models/audit_log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models/document.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models/document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models/message.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models/preference.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models/preference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models/session.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models/session.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/repositories/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repositories/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/repositories/audit_log_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repositories/audit_log_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/repositories/document_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repositories/document_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/repositories/message_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repositories/message_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/repositories/preference_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repositories/preference_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/repositories/project_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repositories/project_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/repositories/session_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repositories/session_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/repositories/user_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/repositories/user_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/audit_log_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/audit_log_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/document_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/document_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/message_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/message_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/preference_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/preference_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/project_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/project_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/session_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/session_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/user_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/user_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/test_api_endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/test_api_endpoints.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/test_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/test_auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/test_repositories.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/test_repositories.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/test_services.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tests/test_services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/context/AuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/context/AuthContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Projects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Session.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Session.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +209,23 @@
       <option name="project" value="LOCAL" />
       <updated>1760786116924</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="front">
+      <option name="closed" value="true" />
+      <created>1760788591055</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1760788591055</updated>
+    </task>
+    <task id="LOCAL-00007" summary="front">
+      <option name="closed" value="true" />
+      <created>1760788611038</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760788611038</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

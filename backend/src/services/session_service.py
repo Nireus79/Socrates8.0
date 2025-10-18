@@ -5,9 +5,9 @@ from uuid import UUID
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
-from src.models import Session as SessionModel
-from src.repositories import SessionRepository, MessageRepository
-from src.services.base_service import BaseService
+from backend.src.models import Session as SessionModel
+from backend.src.repositories import SessionRepository, MessageRepository
+from backend.src.services.base_service import BaseService
 
 
 class SessionService(BaseService):

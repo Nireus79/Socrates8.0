@@ -5,9 +5,9 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import uuid
-from src.database import SessionLocal, engine
-from src.models import Base, User, Project, Session, Message, UserPreference
-from src.config import settings
+from backend.src.database import SessionLocal, engine
+from backend.src.models import Base, User, Project, Session, Message, UserPreference
+from backend.src.config import settings
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

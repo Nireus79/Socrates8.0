@@ -9,6 +9,8 @@ import { Dashboard } from './pages/Dashboard'
 import { Projects } from './pages/Projects'
 import { ProjectDetail } from './pages/ProjectDetail'
 import { Session } from './pages/Session'
+import { Settings } from './pages/Settings'
+import { Messages } from './pages/Messages'
 import { LandingPage } from './pages/LandingPage'
 
 export const Router: React.FC = () => {
@@ -58,6 +60,26 @@ export const Router: React.FC = () => {
               <ProtectedRoute>
                 <Layout>
                   <Session />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/messages"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Messages />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Settings />
                 </Layout>
               </ProtectedRoute>
             }

@@ -4,9 +4,9 @@ from typing import Optional
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from src.models import UserPreference
-from src.repositories import PreferenceRepository
-from src.services.base_service import BaseService
+from backend.src.models import UserPreference
+from backend.src.repositories import PreferenceRepository
+from backend.src.services.base_service import BaseService
 
 
 class PreferenceService(BaseService):

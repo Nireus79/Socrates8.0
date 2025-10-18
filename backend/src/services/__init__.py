@@ -1,13 +1,13 @@
 """Service layer for business logic."""
 
-from src.services.base_service import BaseService
-from src.services.user_service import UserService
-from src.services.project_service import ProjectService
-from src.services.session_service import SessionService
-from src.services.message_service import MessageService
-from src.services.preference_service import PreferenceService
-from src.services.document_service import DocumentService
-from src.services.audit_log_service import AuditLogService
+from backend.src.services.base_service import BaseService
+from backend.src.services.user_service import UserService
+from backend.src.services.project_service import ProjectService
+from backend.src.services.session_service import SessionService
+from backend.src.services.message_service import MessageService
+from backend.src.services.preference_service import PreferenceService
+from backend.src.services.document_service import DocumentService
+from backend.src.services.audit_log_service import AuditLogService
 
 __all__ = [
     "BaseService",

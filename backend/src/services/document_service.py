@@ -4,9 +4,9 @@ from typing import List, Optional
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from src.models import Document
-from src.repositories import DocumentRepository
-from src.services.base_service import BaseService
+from backend.src.models import Document
+from backend.src.repositories import DocumentRepository
+from backend.src.services.base_service import BaseService
 
 
 class DocumentService(BaseService):

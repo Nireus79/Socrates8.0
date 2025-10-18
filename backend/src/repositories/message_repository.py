@@ -4,8 +4,8 @@ from typing import List
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from src.models import Message
-from src.repositories.base_repository import BaseRepository
+from backend.src.models import Message
+from backend.src.repositories.base_repository import BaseRepository
 
 
 class MessageRepository(BaseRepository[Message]):

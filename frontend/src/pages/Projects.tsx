@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../services/api'
 import { Project } from '../types/models'
+import { CreateProjectModal } from '../components/CreateProjectModal'
 import './Pages.css'
 
 export const Projects: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [showCreateProject, setShowCreateProject] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -31,8 +33,13 @@ export const Projects: React.FC = () => {
   }
 
   const handleNewProject = () => {
-    // TODO: Show modal or navigate to create project page
-    console.log('Create new project')
+    setShowCreateProject(true)
+  }
+
+  const handleProjectCreated = async () => {
+    // Refresh projects list
+    const response = await api.getProjects()
+    setProjects(response.data || [])
   }
 
   if (loading) {
@@ -82,6 +89,12 @@ export const Projects: React.FC = () => {
           ))}
         </div>
       )}
+
+      <CreateProjectModal
+        isOpen={showCreateProject}
+        onClose={() => setShowCreateProject(false)}
+        onSuccess={handleProjectCreated}
+      />
     </div>
   )
 }

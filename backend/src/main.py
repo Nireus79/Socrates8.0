@@ -6,11 +6,11 @@ import json
 from typing import Set
 from uuid import UUID
 
-from src.config import settings
-from src.api.routes import auth, project, session, message, profile
-from src.auth.jwt_handler import JWTHandler
-from src.repositories import UserRepository
-from src.database import get_db
+from backend.src.config import settings
+from backend.src.api.routes import auth, project, session, message, profile
+from backend.src.auth.jwt_handler import JWTHandler
+from backend.src.repositories import UserRepository
+from backend.src.database import get_db
 
 # Create FastAPI application
 app = FastAPI(

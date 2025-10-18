@@ -54,11 +54,27 @@ export const Session: React.FC = () => {
 
     setSending(true)
     try {
-      const response = await api.sendMessage(sessionId, messageInput, 'user')
-      setMessages([...messages, response.data])
+      const response = await api.sendMessage(sessionId, messageInput)
+      // Add user message
+      const userMessage = {
+        id: Date.now().toString(),
+        type: 'user',
+        content: messageInput,
+      }
+      setMessages([...messages, userMessage])
       setMessageInput('')
 
-      // TODO: Implement AI response handling via WebSocket or polling
+      // Handle AI response from API response data
+      if (response.data) {
+        const aiMessage = response.data.assistant_message || response.data.message
+        if (aiMessage) {
+          setMessages(prev => [...prev, {
+            id: Date.now().toString(),
+            type: 'assistant',
+            content: aiMessage,
+          }])
+        }
+      }
     } catch (err) {
       console.error('Failed to send message:', err)
       setError('Failed to send message')
@@ -107,14 +123,14 @@ export const Session: React.FC = () => {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`message ${message.type}`}
+                  className={`message ${message.type || message.role}`}
                 >
                   <div className="message-avatar">
-                    {message.type === 'user' ? '👤' : '🤖'}
+                    {(message.type === 'user' || message.role === 'user') ? '👤' : '🤖'}
                   </div>
                   <div className="message-content">
                     <span className="message-type">
-                      {message.type === 'user' ? 'You' : 'AI'}
+                      {(message.type === 'user' || message.role === 'user') ? 'You' : 'AI'}
                     </span>
                     <p>{message.content}</p>
                   </div>

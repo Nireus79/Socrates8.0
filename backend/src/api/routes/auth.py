@@ -4,11 +4,11 @@ import logging
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 
-from src.database import get_db
-from src.services.user_service import UserService
-from src.auth.jwt_handler import JWTHandler
-from src.schemas.auth import RegisterRequest, LoginRequest, LoginResponse, TokenResponse
-from src.config import settings
+from backend.src.database import get_db
+from backend.src.services.user_service import UserService
+from backend.src.auth.jwt_handler import JWTHandler
+from backend.src.schemas.auth import RegisterRequest, LoginRequest, LoginResponse, TokenResponse
+from backend.src.config import settings
 from datetime import timedelta
 
 logger = logging.getLogger(__name__)

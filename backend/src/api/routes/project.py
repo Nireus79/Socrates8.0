@@ -4,11 +4,11 @@ from fastapi import APIRouter, HTTPException, status, Depends, Query
 from sqlalchemy.orm import Session
 from uuid import UUID
 
-from src.database import get_db
-from src.services.project_service import ProjectService
-from src.dependencies import get_current_user
-from src.schemas.project import ProjectCreate, ProjectUpdate, ProjectResponse, ProjectListResponse
-from src.models.user import User
+from backend.src.database import get_db
+from backend.src.services.project_service import ProjectService
+from backend.src.dependencies import get_current_user
+from backend.src.schemas.project import ProjectCreate, ProjectUpdate, ProjectResponse, ProjectListResponse
+from backend.src.models.user import User
 
 router = APIRouter(tags=["projects"])
 

@@ -4,8 +4,8 @@ from typing import Optional, List
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from src.models import Session as SessionModel
-from src.repositories.base_repository import BaseRepository
+from backend.src.models import Session as SessionModel
+from backend.src.repositories.base_repository import BaseRepository
 
 
 class SessionRepository(BaseRepository[SessionModel]):

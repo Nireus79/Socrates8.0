@@ -4,8 +4,8 @@ import pytest
 from datetime import timedelta
 from uuid import uuid4
 
-from src.auth.jwt_handler import JWTHandler
-from src.config import settings
+from backend.src.auth.jwt_handler import JWTHandler
+from backend.src.config import settings
 
 
 class TestJWTHandler:

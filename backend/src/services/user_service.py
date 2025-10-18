@@ -6,9 +6,9 @@ from uuid import UUID
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 
-from src.models import User
-from src.repositories import UserRepository
-from src.services.base_service import BaseService
+from backend.src.models import User
+from backend.src.repositories import UserRepository
+from backend.src.services.base_service import BaseService
 
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 

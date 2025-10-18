@@ -20,7 +20,16 @@ export const Login: React.FC = () => {
       await login(email, password)
       navigate('/dashboard')
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Login failed. Please try again.')
+      let errorMessage = 'Login failed. Please try again.'
+
+      if (err.response?.data?.detail) {
+        const detail = err.response.data.detail
+        errorMessage = typeof detail === 'string' ? detail : JSON.stringify(detail)
+      } else if (err.message) {
+        errorMessage = err.message
+      }
+
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }

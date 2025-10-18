@@ -4,9 +4,9 @@ from typing import List, Optional
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from src.models import Project
-from src.repositories import ProjectRepository
-from src.services.base_service import BaseService
+from backend.src.models import Project
+from backend.src.repositories import ProjectRepository
+from backend.src.services.base_service import BaseService
 
 
 class ProjectService(BaseService):

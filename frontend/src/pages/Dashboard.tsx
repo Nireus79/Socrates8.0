@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { api } from '../services/api'
+import { CreateProjectModal } from '../components/CreateProjectModal'
 import './Pages.css'
 
 export const Dashboard: React.FC = () => {
@@ -11,6 +12,7 @@ export const Dashboard: React.FC = () => {
     messageCount: 0,
   })
   const [loading, setLoading] = useState(true)
+  const [showCreateProject, setShowCreateProject] = useState(false)
 
   useEffect(() => {
     // Fetch dashboard stats
@@ -70,7 +72,12 @@ export const Dashboard: React.FC = () => {
           <h3>Recent Projects</h3>
           <div className="empty-state">
             <p>No projects yet. Create your first project to get started!</p>
-            <button className="btn btn-primary">New Project</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => setShowCreateProject(true)}
+            >
+              New Project
+            </button>
           </div>
         </section>
 
@@ -78,10 +85,21 @@ export const Dashboard: React.FC = () => {
           <h3>Recent Sessions</h3>
           <div className="empty-state">
             <p>No active sessions. Start a new session to begin learning!</p>
-            <button className="btn btn-primary">New Session</button>
+            <button className="btn btn-primary" onClick={() => setShowCreateProject(true)}>
+              New Session
+            </button>
           </div>
         </section>
       </div>
+
+      <CreateProjectModal
+        isOpen={showCreateProject}
+        onClose={() => setShowCreateProject(false)}
+        onSuccess={() => {
+          // Refresh stats
+          setLoading(true)
+        }}
+      />
     </div>
   )
 }

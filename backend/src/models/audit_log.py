@@ -4,7 +4,7 @@ import uuid
 from sqlalchemy import Column, String, DateTime, func, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 
-from src.models.base import Base
+from backend.src.models.base import Base
 
 
 class AuditLog(Base):

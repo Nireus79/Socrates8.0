@@ -3,15 +3,15 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 
-from src.database import get_db
-from src.services.user_service import UserService
-from src.services.preference_service import PreferenceService
-from src.dependencies import get_current_user
-from src.schemas.profile import (
+from backend.src.database import get_db
+from backend.src.services.user_service import UserService
+from backend.src.services.preference_service import PreferenceService
+from backend.src.dependencies import get_current_user
+from backend.src.schemas.profile import (
     ProfileResponse, ProfileUpdate, ChangePasswordRequest,
     PreferenceResponse, PreferenceUpdate
 )
-from src.models.user import User
+from backend.src.models.user import User
 
 router = APIRouter(tags=["profile"])
 

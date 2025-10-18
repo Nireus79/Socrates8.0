@@ -5,7 +5,7 @@ from typing import Optional
 from jose import JWTError, jwt
 from uuid import UUID
 
-from src.config import settings
+from backend.src.config import settings
 
 
 class JWTHandler:

@@ -1,13 +1,13 @@
 """SQLAlchemy models for Socrates 8.0."""
 
-from src.models.base import Base
-from src.models.user import User
-from src.models.project import Project
-from src.models.session import Session
-from src.models.message import Message
-from src.models.preference import UserPreference
-from src.models.document import Document
-from src.models.audit_log import AuditLog
+from backend.src.models.base import Base
+from backend.src.models.user import User
+from backend.src.models.project import Project
+from backend.src.models.session import Session
+from backend.src.models.message import Message
+from backend.src.models.preference import UserPreference
+from backend.src.models.document import Document
+from backend.src.models.audit_log import AuditLog
 
 __all__ = [
     "Base",

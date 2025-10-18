@@ -37,11 +37,21 @@ class APIClient {
 
   // Auth endpoints
   async register(email: string, password: string, name: string) {
-    return this.client.post('/register', { email, password, name })
+    const [first_name, last_name] = name.split(' ', 2)
+    return this.client.post('/register', {
+      username: email.split('@')[0], // Use email prefix as username
+      email,
+      password,
+      first_name: first_name || name,
+      last_name: last_name || ''
+    })
   }
 
   async login(email: string, password: string) {
-    return this.client.post('/login', { email, password })
+    return this.client.post('/login', {
+      username: email.split('@')[0], // Use email prefix as username
+      password
+    })
   }
 
   async logout() {
@@ -105,6 +115,23 @@ class APIClient {
 
   async sendMessage(sessionId: string, content: string) {
     return this.client.post(`/sessions/${sessionId}/messages`, { content })
+  }
+
+  // Generic methods for flexibility
+  async get(endpoint: string, config?: any) {
+    return this.client.get(endpoint, config)
+  }
+
+  async post(endpoint: string, data?: any, config?: any) {
+    return this.client.post(endpoint, data, config)
+  }
+
+  async put(endpoint: string, data?: any, config?: any) {
+    return this.client.put(endpoint, data, config)
+  }
+
+  async delete(endpoint: string, config?: any) {
+    return this.client.delete(endpoint, config)
   }
 
   // Health check
