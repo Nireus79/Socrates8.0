@@ -200,3 +200,77 @@ class SessionService(BaseService):
             Message count
         """
         return self.message_repo.get_by_session_count(session_id)
+
+    def count_sessions(self, owner_id: UUID = None, project_id: UUID = None, status: str = None) -> int:
+        """Count sessions for user.
+
+        Args:
+            owner_id: Owner user ID
+            project_id: Optional project ID filter
+            status: Optional status filter
+
+        Returns:
+            Count of sessions
+        """
+        query = self.db.query(func.count(SessionModel.id))
+
+        if owner_id:
+            query = query.filter(SessionModel.owner_id == owner_id)
+
+        if project_id:
+            query = query.filter(SessionModel.project_id == project_id)
+
+        if status:
+            query = query.filter(SessionModel.status == status)
+
+        return query.scalar()
+
+    def get_sessions_paginated(
+        self,
+        owner_id: UUID,
+        page: int = 1,
+        limit: int = 10,
+        project_id: UUID = None,
+        status: str = None
+    ) -> list:
+        """Get paginated sessions for user.
+
+        Args:
+            owner_id: Owner user ID
+            page: Page number (1-indexed)
+            limit: Items per page
+            project_id: Optional project ID filter
+            status: Optional status filter
+
+        Returns:
+            List of sessions
+        """
+        query = self.db.query(SessionModel).filter(SessionModel.owner_id == owner_id)
+
+        if project_id:
+            query = query.filter(SessionModel.project_id == project_id)
+
+        if status:
+            query = query.filter(SessionModel.status == status)
+
+        # Sort by created_at descending
+        query = query.order_by(SessionModel.created_at.desc())
+
+        # Apply pagination
+        skip = (page - 1) * limit
+        return query.offset(skip).limit(limit).all()
+
+    def get_session_by_id(self, session_id: UUID, owner_id: UUID = None) -> Optional[SessionModel]:
+        """Get session by ID.
+
+        Args:
+            session_id: Session ID
+            owner_id: Optional owner ID for authorization
+
+        Returns:
+            Session or None
+
+        Raises:
+            ValueError: If not authorized
+        """
+        return self.get_session(session_id, owner_id)

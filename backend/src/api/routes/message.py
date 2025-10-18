@@ -10,6 +10,7 @@ from backend.src.services.session_service import SessionService
 from backend.src.dependencies import get_current_user
 from backend.src.schemas.message import MessageCreate, MessageResponse, MessageListResponse, SendMessageResponse
 from backend.src.models.user import User
+from backend.src.config import settings
 
 router = APIRouter(tags=["messages"])
 
@@ -35,7 +36,7 @@ async def get_messages(
             raise HTTPException(status_code=403, detail="Not authorized to view this session")
 
         # Get messages
-        message_service = MessageService(db)
+        message_service = MessageService(db, settings.ANTHROPIC_API_KEY)
         total = message_service.count_messages(session_id=session_id)
 
         messages = message_service.get_messages_paginated(
@@ -76,7 +77,7 @@ async def send_message(
             raise HTTPException(status_code=403, detail="Not authorized to send messages in this session")
 
         # Send message and get response
-        message_service = MessageService(db)
+        message_service = MessageService(db, settings.ANTHROPIC_API_KEY)
         user_message, assistant_response = message_service.send_message(
             session_id=session_id,
             user_id=current_user.id,

@@ -186,3 +186,65 @@ class ProjectService(BaseService):
             List of projects
         """
         return self.repo.get_by_status(status)
+
+    def count_projects(self, owner_id: UUID = None, status: str = None) -> int:
+        """Count projects for user.
+
+        Args:
+            owner_id: Owner user ID
+            status: Optional status filter
+
+        Returns:
+            Count of projects
+        """
+        from sqlalchemy import func
+        query = self.db.query(func.count(Project.id))
+
+        if owner_id:
+            query = query.filter(Project.owner_id == owner_id)
+
+        if status:
+            query = query.filter(Project.status == status)
+
+        return query.scalar()
+
+    def get_projects_paginated(
+        self,
+        owner_id: UUID,
+        page: int = 1,
+        limit: int = 10,
+        status: str = None
+    ) -> List[Project]:
+        """Get paginated projects for user.
+
+        Args:
+            owner_id: Owner user ID
+            page: Page number (1-indexed)
+            limit: Items per page
+            status: Optional status filter
+
+        Returns:
+            List of projects
+        """
+        query = self.db.query(Project).filter(Project.owner_id == owner_id)
+
+        if status:
+            query = query.filter(Project.status == status)
+
+        # Sort by created_at descending
+        query = query.order_by(Project.created_at.desc())
+
+        # Apply pagination
+        skip = (page - 1) * limit
+        return query.offset(skip).limit(limit).all()
+
+    def get_project_by_id(self, project_id: UUID) -> Optional[Project]:
+        """Get project by ID.
+
+        Args:
+            project_id: Project ID
+
+        Returns:
+            Project or None
+        """
+        return self.repo.get_by_id(project_id)

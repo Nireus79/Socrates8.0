@@ -106,6 +106,9 @@ class MessageService(BaseService):
         Raises:
             Exception: If API call fails
         """
+        # Get session for mode and role information
+        session = self.session_repo.get_by_id(session_id)
+
         # Get message history for context (last 10 messages)
         messages_history = self.repo.get_by_session_sorted(
             session_id,
@@ -127,14 +130,46 @@ class MessageService(BaseService):
             "content": user_input
         })
 
-        # Call Claude API
-        response = self.client.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=2000,
-            messages=messages
-        )
+        # Get system prompt based on session mode
+        system_prompt = self._get_system_prompt(session)
 
-        return response.content[0].text
+        # Call Claude API with system prompt
+        try:
+            response = self.client.messages.create(
+                model="claude-3-5-sonnet-20241022",
+                max_tokens=2000,
+                system=system_prompt,
+                messages=messages
+            )
+            return response.content[0].text
+        except Exception as e:
+            self.logger.error(f"Claude API call failed: {e}")
+            # Return a fallback message
+            return "I apologize, but I'm experiencing technical difficulties. Please try again in a moment."
+
+    def _get_system_prompt(self, session) -> str:
+        """Get system prompt based on session mode and role.
+
+        Args:
+            session: Session object
+
+        Returns:
+            System prompt string
+        """
+        mode = session.mode if session else "chat"
+        role = session.role if session and session.role else "AI Assistant"
+
+        base_prompt = f"You are {role}. Be helpful, respectful, and educational. "
+
+        mode_prompts = {
+            "chat": "Engage in friendly conversation and help the user with their questions. Be conversational and approachable.",
+            "question": "Help the user answer specific questions. Provide clear, concise explanations. Ask clarifying questions if needed.",
+            "teaching": "Act as a teacher/mentor. Explain concepts clearly, provide examples, and help the user understand the material. Encourage learning and ask probing questions.",
+            "review": "Review the user's work constructively. Point out strengths, areas for improvement, and provide specific suggestions. Be encouraging but honest."
+        }
+
+        system_prompt = base_prompt + mode_prompts.get(mode, mode_prompts["chat"])
+        return system_prompt
 
     def get_session_messages(
         self,
@@ -204,3 +239,45 @@ class MessageService(BaseService):
             Message count
         """
         return self.repo.get_by_session_count(session_id)
+
+    def count_messages(self, session_id: UUID = None) -> int:
+        """Count messages for session.
+
+        Args:
+            session_id: Session ID
+
+        Returns:
+            Count of messages
+        """
+        from sqlalchemy import func
+        query = self.db.query(func.count(Message.id))
+
+        if session_id:
+            query = query.filter(Message.session_id == session_id)
+
+        return query.scalar()
+
+    def get_messages_paginated(
+        self,
+        session_id: UUID,
+        page: int = 1,
+        limit: int = 50
+    ) -> List[Message]:
+        """Get paginated messages for session.
+
+        Args:
+            session_id: Session ID
+            page: Page number (1-indexed)
+            limit: Items per page
+
+        Returns:
+            List of messages
+        """
+        query = self.db.query(Message).filter(Message.session_id == session_id)
+
+        # Sort by created_at ascending (oldest first)
+        query = query.order_by(Message.created_at.asc())
+
+        # Apply pagination
+        skip = (page - 1) * limit
+        return query.offset(skip).limit(limit).all()

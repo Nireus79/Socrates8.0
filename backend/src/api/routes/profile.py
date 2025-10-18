@@ -76,7 +76,7 @@ async def change_password(
         service = UserService(db)
 
         # Verify current password
-        if not service.verify_password(request.current_password, current_user.hashed_password):
+        if not service.verify_password(request.current_password, current_user.password_hash):
             raise HTTPException(status_code=401, detail="Current password is incorrect")
 
         # Validate new password matches confirmation
@@ -88,7 +88,7 @@ async def change_password(
             raise HTTPException(status_code=400, detail="Password must be at least 8 characters")
 
         # Update password
-        current_user.hashed_password = service.hash_password(request.new_password)
+        current_user.password_hash = service.hash_password(request.new_password)
         db.commit()
 
         return {
@@ -111,12 +111,7 @@ async def get_settings(
     """Get current user's preferences/settings."""
     try:
         service = PreferenceService(db)
-        preferences = service.get_preferences(current_user.id)
-
-        if not preferences:
-            # Return default preferences if none exist
-            preferences = service.create_default_preferences(current_user.id)
-            db.commit()
+        preferences = service.get_or_create_preferences(current_user.id)
 
         return {
             "success": True,
@@ -136,11 +131,7 @@ async def update_settings(
     """Update current user's preferences/settings."""
     try:
         service = PreferenceService(db)
-        preferences = service.get_preferences(current_user.id)
-
-        if not preferences:
-            # Create default preferences if they don't exist
-            preferences = service.create_default_preferences(current_user.id)
+        preferences = service.get_or_create_preferences(current_user.id)
 
         # Update fields
         if request.theme is not None:
